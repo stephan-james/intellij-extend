@@ -20,10 +20,10 @@ That's all. Seems not to be too much. But believe me: used in the right way it b
 ### Configuration
 
 - Open the "Tools" section in IntelliJ preferences dialog and find the IntelliJ eXtend configuration tab. ![intellij-extend preferences](https://cloud.githubusercontent.com/assets/11229521/7433259/dcfe59c4-f02f-11e4-97ef-1fb2d517240c.png)
-- In the field "Command to execute" fill in the command line of the program you want to be executed. This can be any arbitrary command which regularly can be used in an operating system shell too.
+- In the field **"Command to execute"** fill in the command line of the program you want to be executed. This can be any arbitrary command which regularly can be used in an operating system shell too.
 - There are three macros (argument variables) provided for this command line:
   - **$TransferPath$**: the absolute path of the transfer files directory
   - **$TransferBuffer$**: the absolute path of the buffer transfer file (*.buffer*)
   - **$TransferSelection$**: the absolute path of the selection transfer file (*.selection*)
-
+- In the field **“Directory for transfer files”** you can specify the path to the directory in which the transfer files will be created. If you leave this field blank the plugin uses a directory named *“com.sjd.intellijextend”* within the temporary io directory.
 
