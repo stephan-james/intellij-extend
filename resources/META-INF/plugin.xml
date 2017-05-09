@@ -1,0 +1,87 @@
+<!--
+  ~ Copyright (c) 2015, http://stephan-james.github.io/intellij-extend
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are met:
+  ~
+  ~ * Redistributions of source code must retain the above copyright notice, this
+  ~   list of conditions and the following disclaimer.
+  ~
+  ~ * Redistributions in binary form must reproduce the above copyright notice,
+  ~   this list of conditions and the following disclaimer in the documentation
+  ~   and/or other materials provided with the distribution.
+  ~
+  ~ * Neither the name of the project nor the names of its
+  ~   contributors may be used to endorse or promote products derived from
+  ~   this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  ~ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  ~ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  ~ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  ~ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  ~ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  ~ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  ~ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  ~ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<idea-plugin>
+  <id>com.sjd.intellijextend</id>
+  <name>IntelliJ eXtend</name>
+  <version>1.1</version>
+  <vendor email="intellijextend@stephanjamesdick.com" url="https://github.com/stephan-james/intellij-extend/wiki">
+    Stephan James Dick
+  </vendor>
+
+  <description><![CDATA[
+<h1>Powerful IntelliJ plugin for external buffer and selection manipulation.</h1>
+<a href="https://github.com/stephan-james/intellij-extend/wiki">Wiki</a> |
+<a href="https://github.com/stephan-james/intellij-extend">Sources</a> |
+<a href="https://github.com/stephan-james/intellij-extend/issues">Issues</a>
+<h2>General usage instructions</h2>
+<ul>
+  <li>Go into an editor.</li>
+  <li>Select some text fragment.</li>
+  <li>Press [control-alt-G] twice or on a Mac use [command-option-G] twice.</li>
+  <li>Alternatively use the action "Execute IntelliJ eXtend..." in the edit menu.</li>
+  <li>The plugin will create two files in a temporary directory:
+    <ul>
+      <li>one with the complete current editor buffer (.buffer) and</li>
+      <li>one with the current selection (.selection).</li>
+  </li>
+  <li>The plugin then executes the external program you have configured.</li>
+  <li>If your program changes the content of the .buffer file the complete editor content will be replaced by the content of this file.</li>
+  <li>Otherwise if your program changes the content of the .selection file the current selection will be replaced by the content of that file.</li>
+</ul>
+That's all. Seems not to be too much. But believe me: used in the right way it becomes very powerful!
+]]></description>
+
+  <idea-version since-build="145.0"/>
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable groupId="tools" id="com.sjd.com.sjd.intellijextend.IntelliJExtendConfiguration"
+                             instance="com.sjd.intellijextend.IntelliJExtendConfiguration"
+                             displayName="IntelliJ eXtend"/>
+  </extensions>
+
+  <application-components>
+    <component>
+      <implementation-class>com.sjd.intellijextend.IntelliJExtendComponent</implementation-class>
+    </component>
+  </application-components>
+
+  <actions>
+    <action class="com.sjd.intellijextend.IntelliJExtendAction" id="com.sjd.com.sjd.intellijextend.IntelliJExtendAction"
+            text="Execute IntelliJ eXtend..."
+            description="Execute the IntelliJ eXtend command">
+      <add-to-group group-id="EditMenu" anchor="last"/>
+      <keyboard-shortcut first-keystroke="control alt G" second-keystroke="control alt G" keymap="$default"/>
+    </action>
+  </actions>
+
+</idea-plugin>

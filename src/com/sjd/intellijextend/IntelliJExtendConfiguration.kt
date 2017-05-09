@@ -28,21 +28,48 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-import com.intellij.openapi.editor.actionSystem.EditorAction;
+import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.options.SearchableConfigurable
+import javax.swing.JComponent
 
-public class IntelliJExtendAction extends EditorAction {
+class IntelliJExtendConfiguration : SearchableConfigurable, Configurable.NoScroll {
 
-    protected IntelliJExtendAction() {
-        this(true);
+    override fun getId(): String = IntelliJExtendConfiguration::class.java.name
+
+    override fun getDisplayName() = IntelliJExtend.NAME + " Configuration"
+
+    override fun createComponent(): JComponent? = form.mainPanel
+
+    override fun isModified() = isCommandModified() || isTransferPathModified()
+
+    override fun apply() {
+        IntelliJExtendComponent.command = command()
+        IntelliJExtendComponent.transferPath = transferPath()
     }
 
-    protected IntelliJExtendAction(boolean defaultHandler) {
-        super(null);
-        if (defaultHandler)
-            setupHandler(new IntelliJExtendEditorWriteAction());
+    override fun reset() {
+        initValuesByState(form)
+    }
+
+    private fun isCommandModified() = IntelliJExtendComponent.command != command()
+
+    private fun isTransferPathModified() = IntelliJExtendComponent.transferPath != transferPath()
+
+    private fun transferPath(): String = form.transferPathField.text
+
+    private fun command(): String = form.commandField.text
+
+    private val form: IntelliJExtendConfigurationFormBase by lazy {
+        val form = IntelliJExtendConfigurationForm()
+        initValuesByState(form)
+        form
+    }
+
+    private fun initValuesByState(form: IntelliJExtendConfigurationFormBase) {
+        form.commandField.text = IntelliJExtendComponent.command
+        form.transferPathField.text = IntelliJExtendComponent.transferPath
     }
 
 }
-

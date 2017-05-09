@@ -28,15 +28,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-import javax.swing.*;
+import org.apache.commons.lang.StringUtils.isNotBlank
 
-public class IntelliJExtendConfigurationFormBase {
+data class IntelliJExtendSettings(
+        var command: String = "",
+        var transferPath: String = "") {
 
-	public JPanel mainPanel;
-	public JTextArea commandField;
-	public JTextField transferPathField;
-	public JButton transferPathButton;
+    fun valid() = isNotBlank(command)
 
 }

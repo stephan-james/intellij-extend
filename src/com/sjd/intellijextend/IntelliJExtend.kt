@@ -28,15 +28,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-import javax.swing.*;
-
-public class IntelliJExtendConfigurationFormBase {
-
-	public JPanel mainPanel;
-	public JTextArea commandField;
-	public JTextField transferPathField;
-	public JButton transferPathButton;
-
+object IntelliJExtend {
+    const val ID = "com.sjd.intellijextend"
+    const val NAME = "IntelliJ eXtend"
 }

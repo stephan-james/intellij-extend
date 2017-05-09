@@ -28,12 +28,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-public interface IntelliJExtend {
+import com.intellij.openapi.actionSystem.DataContext
+import com.intellij.openapi.editor.Caret
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler
 
-    String ID = "com.sjd.intellijextend";
+class IntelliJExtendEditorWriteAction(runForEachCaret: Boolean = false) : EditorWriteActionHandler(runForEachCaret) {
 
-    String NAME = "IntelliJ eXtend";
+    override fun executeWriteAction(editor: Editor, caret: Caret?, dataContext: DataContext) {
+        IntelliJExtendExecutor(editor).execute()
+    }
 
 }

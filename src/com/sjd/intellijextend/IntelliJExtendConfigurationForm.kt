@@ -28,38 +28,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import com.intellij.openapi.fileChooser.FileChooser
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.project.ProjectManager
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VirtualFile
+import org.apache.commons.lang.StringUtils.isBlank
 
-public class IntelliJExtendSettings {
+class IntelliJExtendConfigurationForm : IntelliJExtendConfigurationFormBase() {
 
-    private String command;
-    private String transferPath;
-
-    public IntelliJExtendSettings() {
-        this.command = "";
-        this.transferPath = "";
+    init {
+        setupActions()
     }
 
-    public String getCommand() {
-        return command;
+    private fun setupActions() {
+        transferPathButton.addActionListener {
+            choosePath().forEach { transferPathField.text = it.path }
+        }
     }
 
-    public void setCommand(String command) {
-        this.command = command;
+    private fun choosePath() =
+            FileChooser.chooseFiles(fileChooserDescriptor(), ProjectManager.getInstance().defaultProject, toSelectFile())
+
+    private fun fileChooserDescriptor(): FileChooserDescriptor {
+        val descriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor()
+        descriptor.isHideIgnored = true
+        descriptor.title = "Select Path for Transfer Files..."
+        return descriptor
     }
 
-    public String getTransferPath() {
-        return transferPath;
-    }
-
-    public void setTransferPath(String transferPath) {
-        this.transferPath = transferPath;
-    }
-
-    public boolean isValid() {
-        return isNotBlank(getCommand());
-    }
+    private fun toSelectFile(): VirtualFile? =
+            if (isBlank(transferPathField.text))
+                null
+            else
+                LocalFileSystem.getInstance().findFileByPath(transferPathField.text)
 
 }

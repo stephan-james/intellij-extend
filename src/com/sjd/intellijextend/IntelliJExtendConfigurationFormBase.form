@@ -1,33 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.sjd.intellijextend.IntelliJExtendConfigurationFormBase">
   <grid id="27dc6" binding="mainPanel" layout-manager="FormLayout">
+    <rowspec value="center:17px:noGrow"/>
+    <rowspec value="top:2dlu:noGrow"/>
+    <rowspec value="center:143px:grow"/>
+    <rowspec value="top:2dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="top:12dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="top:2dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow"/>
-    <rowspec value="top:3dlu:noGrow"/>
-    <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:d:grow"/>
-    <colspec value="fill:d:grow"/>
-    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:452px:grow"/>
+    <colspec value="left:2dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="501" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
+      <vspacer id="dd3ae">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+      </vspacer>
+      <component id="a59f8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <labelFor value="cf69c"/>
+          <text value="Command to execute:"/>
+          <toolTipText value="Use $transferPath$ as variable."/>
+        </properties>
+      </component>
+      <component id="4b7e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <labelFor value="a6ad6"/>
+          <text value="Directory for transfer files (can be left blank):"/>
+        </properties>
+      </component>
+      <component id="a6ad6" class="javax.swing.JTextField" binding="transferPathField">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <toolTipText value="Enter the absolute path for the transfer file."/>
+        </properties>
+      </component>
+      <component id="37bf5" class="javax.swing.JButton" binding="transferPathButton">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="..."/>
+        </properties>
+      </component>
       <scrollpane id="cf69c">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -43,7 +86,7 @@
             <properties>
               <lineWrap value="true"/>
               <opaque value="true"/>
-              <preferredSize width="-1" height="80"/>
+              <preferredSize width="-1" height="85"/>
               <rows value="5"/>
               <toolTipText value="Enter a valid command line for your operating system."/>
               <wrapStyleWord value="true"/>
@@ -51,60 +94,13 @@
           </component>
         </children>
       </scrollpane>
-      <component id="a59f8" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <labelFor value="cf69c"/>
-          <text value="Command to execute:"/>
-          <toolTipText value="Use $transferPath$ as variable."/>
-        </properties>
-      </component>
-      <vspacer id="dd3ae">
-        <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-      </vspacer>
-      <component id="4b7e" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <labelFor value="a6ad6"/>
-          <text value="Directory for transfer files (can be left blank):"/>
-        </properties>
-      </component>
-      <component id="a6ad6" class="javax.swing.JTextField" binding="transferPathField">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <toolTipText value="Enter the absolute path for the transfer file."/>
-        </properties>
-      </component>
-      <component id="37bf5" class="javax.swing.JButton" binding="transferPathButton">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <text value="..."/>
-        </properties>
-      </component>
       <component id="44a27" class="javax.swing.JLabel">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
-          <text value="&lt;html&gt;Provided macros in the command to execute field:&#10;&lt;ul&gt;&#10;&lt;li&gt;&lt;strong&gt;$TransferPath$&lt;/strong&gt;&#10; - absolute path of the transfer files directory&#10;&lt;li&gt;&lt;strong&gt;$TransferBuffer$&lt;/strong&gt;&#10; - absolute path of the buffer transfer file&#10;&lt;li&gt;&lt;strong&gt;$TransferSelection$&lt;/strong&gt;&#10; - absolute path of the selection transfer file&#10;&lt;/ul&gt;&#10;Find examples and more help at &lt;a href=&quot;https://github.com/stephan-james/intellij-extend/wiki&quot;&gt;https://github.com/stephan-james/intellij-extend/wiki&lt;/a&gt;&#10;&lt;/html&gt;" noi18n="true"/>
+          <text value="&lt;html&gt;Provided macros in the &lt;em&gt;command to execute&lt;/em&gt; field:&#10;&lt;ul&gt;&#10;&lt;li&gt;&lt;strong&gt;$TransferPath$&lt;/strong&gt;&#10; - absolute path of the transfer files directory&#10;&lt;li&gt;&lt;strong&gt;$TransferBuffer$&lt;/strong&gt;&#10; - absolute path of the buffer transfer file&#10;&lt;li&gt;&lt;strong&gt;$TransferSelection$&lt;/strong&gt;&#10; - absolute path of the selection transfer file&#10;&lt;/ul&gt;&#10;&lt;small&gt;Find examples and more help at &lt;a href=&quot;https://github.com/stephan-james/intellij-extend/wiki&quot;&gt;https://github.com/stephan-james/intellij-extend/wiki&lt;/a&gt;&lt;/small&gt;&#10;&lt;/html&gt;" noi18n="true"/>
         </properties>
       </component>
     </children>

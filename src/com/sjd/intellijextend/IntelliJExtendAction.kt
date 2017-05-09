@@ -28,26 +28,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.sjd.intellijextend;
+package com.sjd.intellijextend
 
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Caret;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
+import com.intellij.openapi.editor.actionSystem.EditorAction
 
-public class IntelliJExtendEditorWriteAction extends EditorWriteActionHandler {
+class IntelliJExtendAction(defaultHandler: Boolean = true) : EditorAction(null) {
 
-    protected IntelliJExtendEditorWriteAction() {
-        this(false);
-    }
-
-    protected IntelliJExtendEditorWriteAction(boolean runForEachCaret) {
-        super(runForEachCaret);
-    }
-
-    @Override
-    public void executeWriteAction(Editor editor, Caret caret, DataContext dataContext) {
-        new IntelliJExtendExecutor(editor).execute();
+    init {
+        if (defaultHandler)
+            setupHandler(IntelliJExtendEditorWriteAction())
     }
 
 }
