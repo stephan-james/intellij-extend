@@ -4,7 +4,7 @@ Powerful IntelliJ plugin for external buffer and selection manipulation.
 
 ### Installation
 
-- Download the plugin bundle from [here](https://github.com/stephan-james/intellij-extend/files/987507/intellij-extend.zip "Download Plugin Bundle...").
+- Download the plugin bundle from [here](https://github.com/stephan-james/intellij-extend/files/991989/intellij-extend.zip "Download Plugin Bundle...").
 - Open the "Settings/Preferences" dialog box and select "Plugins" on the left pane.
 - On the right pane of the dialog, click the "Install plugin from disk" button.
 - In the dialog that opens, select the downloaded plugin bundle.
