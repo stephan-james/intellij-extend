@@ -66,11 +66,8 @@ class IntelliJExtendExecutor(private val editor: Editor) {
 
     private fun createFilesAndExecuteCommand() {
 
-        val buffer = editorBuffer
-        writeBufferToTransferFile(buffer)
-
-        val selection = editorSelection
-        writeSelectionToTransferFile(selection)
+        val buffer = writeBufferToTransferFile(editorBuffer)
+        val selection = writeSelectionToTransferFile(editorSelection)
 
         val exitCode = executeCommand()
 
@@ -122,12 +119,15 @@ class IntelliJExtendExecutor(private val editor: Editor) {
             .replace("\$TransferBuffer$", bufferFile.absolutePath)
             .replace("\$TransferSelection$", selectionFile.absolutePath)
 
-    private fun writeSelectionToTransferFile(selection: String) {
-        writeToFile(selectionFile, selection)
-    }
+    private fun writeSelectionToTransferFile(selection: String) =
+            writeToAndLoadFile(selectionFile, selection)
 
-    private fun writeBufferToTransferFile(buffer: String) {
-        writeToFile(bufferFile, buffer)
+    private fun writeBufferToTransferFile(buffer: String) =
+        writeToAndLoadFile(bufferFile, buffer)
+
+    private fun writeToAndLoadFile(file: File, buffer: String): String {
+        writeToFile(file, buffer)
+        return loadFile(file)
     }
 
     private val selectionFile: File

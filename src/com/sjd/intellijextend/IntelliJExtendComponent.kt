@@ -31,17 +31,17 @@
 package com.sjd.intellijextend
 
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.*
+import com.intellij.openapi.components.ApplicationComponent
+import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.State
+import com.intellij.openapi.components.Storage
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.util.xmlb.XmlSerializerUtil
 
 @State(
         name = IntelliJExtend.ID,
-        storages = arrayOf(
-                Storage(id = "default",
-                        file = StoragePathMacros.APP_CONFIG + "/" + IntelliJExtend.ID + ".xml")
-        )
+        storages = arrayOf(Storage(IntelliJExtend.ID + ".xml"))
 )
 class IntelliJExtendComponent : ApplicationComponent, PersistentStateComponent<IntelliJExtendSettings> {
 
