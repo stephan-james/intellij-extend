@@ -30,7 +30,7 @@ That's all. Seems not to be too much. But believe me: used in the right way it b
 
 - Open the "Tools" section in IntelliJ preferences dialog and find the IntelliJ eXtend configuration tab. ![intellij-extend preferences](https://cloud.githubusercontent.com/assets/11229521/7433259/dcfe59c4-f02f-11e4-97ef-1fb2d517240c.png)
 - In the field **"Command to execute"** fill in the command line of the program you want to be executed. This can be any arbitrary command which regularly can be used in an operating system shell too.
-- There are three macros (argument variables) provided for this command line:
+- There are some macros (argument variables) provided for this command line:
   - **$ProjectFilePath$**: absolute path of the project file
   - **$FilePath$**: absolute path of the currently edited file
   - **$TransferPath$**: the absolute path of the transfer files directory
