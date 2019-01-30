@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, http://stephan-james.github.io/intellij-extend
+ * Copyright (c) 2019, http://stephan-james.github.io/intellij-extend
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,6 @@
 package com.sjd.intellijextend
 
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.ApplicationComponent
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
@@ -41,19 +40,13 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 
 @State(
         name = IntelliJExtend.ID,
-        storages = arrayOf(Storage(IntelliJExtend.ID + ".xml"))
+        storages = [Storage(IntelliJExtend.ID + ".xml")]
 )
-class IntelliJExtendComponent : ApplicationComponent, PersistentStateComponent<IntelliJExtendSettings> {
+class IntelliJExtendComponent : PersistentStateComponent<IntelliJExtendSettings> {
 
     private val settings = IntelliJExtendSettings()
 
-    override fun getComponentName(): String = IntelliJExtendComponent::class.java.name
-
     override fun getState() = settings
-
-    override fun initComponent() {}
-
-    override fun disposeComponent() {}
 
     override fun loadState(state: IntelliJExtendSettings) {
         XmlSerializerUtil.copyBean(state, settings)
@@ -61,16 +54,16 @@ class IntelliJExtendComponent : ApplicationComponent, PersistentStateComponent<I
 
     companion object {
 
-        private val instance: IntelliJExtendComponent
+        private val instance
             get() = ApplicationManager.getApplication().getComponent(IntelliJExtendComponent::class.java)
 
-        var command: String
+        var command
             get() = instance.state.command
             set(value) {
                 instance.state.command = value
             }
 
-        var transferPath: String
+        var transferPath
             get() = instance.state.transferPath
             set(value) {
                 instance.state.transferPath = value

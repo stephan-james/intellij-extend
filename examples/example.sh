@@ -15,13 +15,19 @@
 #  TransferBuffer    = /private/var/folders/2s/xHJhgvHG/T/.buffer
 #  ...
 
-TransferPath=$1
-TransferBuffer=$2
-TransferSelection=$3
+ProjectFilePath=$1
+FilePath=$2
+TransferPath=$3
+TransferBuffer=$4
+TransferSelection=$5
+CaretOffset=$6
 
-date > $TransferSelection
-echo "TransferPath      = $TransferPath" >> $TransferSelection
-echo "TransferBuffer    = $TransferBuffer" >> $TransferSelection
-echo "TransferSelection = $TransferSelection" >> $TransferSelection
-echo "-------------------------------------------------------------" >> $TransferSelection
-echo "The rest is up to you :-)" >> $TransferSelection
+date > ${TransferSelection}
+echo "ProjectFilePath   = $ProjectFilePath" >> ${TransferSelection}
+echo "FilePath          = $FilePath" >> ${TransferSelection}
+echo "TransferPath      = $TransferPath" >> ${TransferSelection}
+echo "TransferBuffer    = $TransferBuffer" >> ${TransferSelection}
+echo "TransferSelection = $TransferSelection" >> ${TransferSelection}
+echo "CaretOffset       = $CaretOffset" >> ${TransferSelection}
+echo "-------------------------------------------------------------" >> ${TransferSelection}
+echo "The rest is up to you :-)" >> ${TransferSelection}

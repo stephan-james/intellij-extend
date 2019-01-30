@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2015, http://stephan-james.github.io/intellij-extend
+  ~ Copyright (c) 2019, http://stephan-james.github.io/intellij-extend
   ~ All rights reserved.
   ~
   ~ Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
 <idea-plugin>
   <id>com.sjd.intellijextend</id>
   <name>IntelliJ eXtend</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <vendor email="intellijextend@stephanjamesdick.com" url="https://github.com/stephan-james/intellij-extend/wiki">
     Stephan James Dick
   </vendor>

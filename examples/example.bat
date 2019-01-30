@@ -8,19 +8,31 @@ rem keys [control-alt-G] [control-alt-G] (on a Mac use [command-option-G] [comma
 rem
 rem The current selection should be replace by something like this:
 rem
-rem  Fri May  8 15:61:93 CEST 2019
-rem  TransferPath      = /private/var/folders/2s/xHJhgvHG/T/.com.sjd.intellijextend
-rem  TransferBuffer    = /private/var/folders/2s/xHJhgvHG/T/.buffer
+rem  29.01.2019
+rem  13:40
+rem  "ProjectFilePath   = C:\Users\james\IdeaProjects\MyProject\.idea\misc.xml"
+rem  "FilePath          = C:\Users\james\IdeaProjects\MyProject\test.txt"
+rem  "TransferPath      = C:\Users\james\AppData\Local\Temp\.com.sjd.intellijextend"
+rem  "TransferBuffer    = C:\Users\james\AppData\Local\Temp\.com.sjd.intellijextend\.buffer"
+rem  "TransferSelection = C:\Users\james\AppData\Local\Temp\.com.sjd.intellijextend\.selection"
+rem  "-------------------------------------------------------------"
+rem  "The rest is up to you :-)"
 rem  ...
 
-set TransferPath=%1
-set TransferBuffer=%2
-set TransferSelection=%3
+set ProjectFilePath=%1
+set FilePath=%2
+set TransferPath=%3
+set TransferBuffer=%4
+set TransferSelection=%5
+set CaretOffset=%6
 
 date /t > %TransferSelection%
 time /t >> %TransferSelection%
+echo "ProjectFilePath   = %ProjectFilePath%" >> %TransferSelection%
+echo "FilePath          = %FilePath%" >> %TransferSelection%
 echo "TransferPath      = %TransferPath%" >> %TransferSelection%
 echo "TransferBuffer    = %TransferBuffer%" >> %TransferSelection%
 echo "TransferSelection = %TransferSelection%" >> %TransferSelection%
+echo "CaretOffset       = %CaretOffset%" >> %TransferSelection%
 echo "-------------------------------------------------------------" >> %TransferSelection%
 echo "The rest is up to you :-)" >> %TransferSelection%

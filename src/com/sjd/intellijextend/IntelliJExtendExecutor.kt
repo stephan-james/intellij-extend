@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, http://stephan-james.github.io/intellij-extend
+ * Copyright (c) 2019, http://stephan-james.github.io/intellij-extend
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,7 @@
 package com.sjd.intellijextend
 
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.util.io.FileUtil.loadFile
@@ -44,7 +45,9 @@ import java.io.File
 
 class IntelliJExtendExecutor(private val editor: Editor) {
 
-    private val LOG = com.intellij.openapi.diagnostic.Logger.getInstance(IntelliJExtendExecutor::class.java)
+    companion object {
+        private val LOG = com.intellij.openapi.diagnostic.Logger.getInstance(IntelliJExtendExecutor::class.java)
+    }
 
     fun execute() {
 
@@ -60,7 +63,7 @@ class IntelliJExtendExecutor(private val editor: Editor) {
 
         } catch (e: Throwable) {
             LOG.info("Failed", e)
-            balloon(MessageType.ERROR, "Failed: " + e.message)
+            balloon(MessageType.ERROR, """Failed: ${e.message}""")
         }
     }
 
@@ -77,7 +80,7 @@ class IntelliJExtendExecutor(private val editor: Editor) {
         balloon(MessageType.INFO, "Run successfully (exit code = $exitCode).")
     }
 
-    private var editorSelection: String
+    private var editorSelection
         get() = defaultString(editor.selectionModel.selectedText)
         set(newSelection) {
             editor.document.replaceString(
@@ -89,7 +92,7 @@ class IntelliJExtendExecutor(private val editor: Editor) {
     private fun rightLineEnded(newSelection: String) = newSelection
             .replace("\r".toRegex(), "")
 
-    private var editorBuffer: String
+    private var editorBuffer
         get() = defaultString(editor.document.charsSequence.toString())
         set(newBuffer) = editor.document.setText(rightLineEnded(newBuffer))
 
@@ -115,38 +118,51 @@ class IntelliJExtendExecutor(private val editor: Editor) {
     private fun readBufferFromTransferFile() = defaultString(loadFile(bufferFile))
 
     private fun buildCommand() = IntelliJExtendComponent.command
+            .replace("\$ProjectFilePath$", projectPath.absolutePath)
+            .replace("\$FilePath$", filePath.absolutePath)
             .replace("\$TransferPath$", transferPath.absolutePath)
             .replace("\$TransferBuffer$", bufferFile.absolutePath)
             .replace("\$TransferSelection$", selectionFile.absolutePath)
+            .replace("\$CaretOffset$", caretOffset.toString())
 
     private fun writeSelectionToTransferFile(selection: String) =
             writeToAndLoadFile(selectionFile, selection)
 
     private fun writeBufferToTransferFile(buffer: String) =
-        writeToAndLoadFile(bufferFile, buffer)
+            writeToAndLoadFile(bufferFile, buffer)
 
     private fun writeToAndLoadFile(file: File, buffer: String): String {
         writeToFile(file, buffer)
         return loadFile(file)
     }
 
-    private val selectionFile: File
-        get() = File(transferPath.absolutePath + "/.selection")
+    private val projectPath
+        get() = File(this.editor.project?.projectFilePath ?: ".")
 
-    private val bufferFile: File
-        get() = File(transferPath.absolutePath + "/.buffer")
+    private val filePath
+        get() = File(FileDocumentManager.getInstance().getFile(this.editor.document)?.canonicalFile?.canonicalPath
+                ?: ".")
 
-    private val transferPath: File
+    private val selectionFile
+        get() = File("""${transferPath.absolutePath}/.selection""")
+
+    private val bufferFile
+        get() = File("""${transferPath.absolutePath}/.buffer""")
+
+    private val transferPath
         get() = File(nonBlankTransferPath)
 
-    private val nonBlankTransferPath: String
+    private val caretOffset
+        get() = editor.caretModel.currentCaret.offset
+
+    private val nonBlankTransferPath
         get() = if (StringUtils.isBlank(IntelliJExtendComponent.transferPath))
             defaultTransferPath
         else
             IntelliJExtendComponent.transferPath
 
-    private val defaultTransferPath: String
-        get() = File(FileUtil.getTempDirectory() + "/." + IntelliJExtend.ID).absolutePath
+    private val defaultTransferPath
+        get() = File("""${FileUtil.getTempDirectory()}/.${IntelliJExtend.ID}""").absolutePath
 
     private fun balloon(messageType: MessageType, message: String) {
         Balloons.show(editor.project!!, messageType, """<strong>${IntelliJExtend.ID}</strong>: $message""")
